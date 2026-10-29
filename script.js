@@ -12,54 +12,22 @@ const CONFIG = {
     { src: "images/galeri-5.jpg", ket: "Menerjang aliran sungai" },
     {
       src: "images/galeri-6.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
+      ket: "Bukit Songo Papat Dengan Pemandangan Gunung Merapi",
     },
-    {
-      src: "images/galeri-7.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
-    {
-      src: "images/galeri-8.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
-    {
-      src: "images/galeri-9.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
+    { src: "images/galeri-7.jpg", ket: "View Gunung Merapi" },
+    { src: "images/galeri-8.jpg", ket: "Melewati Sungai Tempuran" },
+    { src: "images/galeri-9.jpg", ket: "Berpose Dengan View Merapi" },
     { src: "images/galeri-10.jpg", ket: "Bukit Songo Papat" },
-    {
-      src: "images/galeri-11.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
-    {
-      src: "images/galeri-12.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
-    {
-      src: "images/galeri-13.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
-    {
-      src: "images/galeri-14.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
+    { src: "images/galeri-11.jpg", ket: "Lewat Trek Air" },
+    { src: "images/galeri-12.jpg", ket: "Bukit Songo Papat View Merapi" },
+    { src: "images/galeri-13.jpg", ket: "Bukit Songopapat" },
+    { src: "images/galeri-14.jpg", ket: "Pose bersama di Sungai tempuran" },
     { src: "images/galeri-15.jpg", ket: "Seru-seruan di sungai" },
-    {
-      src: "images/galeri-16.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
-    {
-      src: "images/galeri-17.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
-    {
-      src: "images/galeri-18.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
-    {
-      src: "images/galeri-19.jpg",
-      ket: "Bukit Songo Papat dengan background Gunung Merapi",
-    },
+    { src: "images/galeri-16.jpg", ket: "" },
+    { src: "images/galeri-17.jpg", ket: "" },
+    { src: "images/galeri-18.jpg", ket: "" },
+    { src: "images/galeri-19.jpg", ket: "" },
+    { src: "images/galeri-20.jpg", ket: "" },
   ],
   hero: "images/hero.jpg", // foto latar bagian atas (opsional)
   paket: [
@@ -68,8 +36,17 @@ const CONFIG = {
       durasi: "1,5 – 2 jam",
       sendiri: "300K",
       tandem: "350K",
+      trek: [
+        "Gardu Pandang",
+        "Omah Putih",
+        "Kaliurang Explore Entrance",
+        "Lorong Oxygen",
+        "Tankaman Natural Park",
+        "Trek Lumpur",
+        "Sungai Tempuran",
+      ], // daftar trek paket ini
       info: [
-        "Trip ATV (150 cc) explore Kaliurang full trek, tanpa berhenti di destinasi wisata",
+        "Trip ATV (150 cc) explore Kaliurang full trek",
         "Open trip",
         "Bisa dipesan on the spot atau reservasi via WhatsApp",
       ],
@@ -88,10 +65,20 @@ const CONFIG = {
       durasi: "2 – 2,5 jam",
       sendiri: "400K",
       tandem: "450K",
+      trek: [
+        "Nawang Jagad",
+        "Gardu Pandang",
+        "Omah Putih",
+        "Kaliurang Explore Entrance",
+        "Lorong Oxygen",
+        "Tankaman Natural Park",
+        "Trek Lumpur",
+        "Sungai Tempuran",
+      ], // daftar trek paket ini
       info: [
         "Trip ATV (150 cc) explore Kaliurang full trek, berhenti di Nawang Jagad & Tankaman Kaliurang",
         "Open trip dan private trip (menyesuaikan keadaan)",
-        "Wajib reservasi via WhatsApp minimal H-2",
+        "Wajib reservasi via WhatsApp minimal H-2 jam 13.00 WIB",
         "Menyesuaikan jadwal operasional destinasi wisata (hari & jam buka/tutup)",
       ],
       fasilitas: [
@@ -104,15 +91,6 @@ const CONFIG = {
         "Kamar mandi, mushola, kantin",
       ],
     },
-  ],
-  trek: [
-    "Nawang Jagad",
-    "Gardu Pandang",
-    "Omah Putih",
-    "Kaliurang Explore Entrance",
-    "Lorong Oxygen",
-    "Trek Lumpur",
-    "Sungai Tempuran",
   ],
   slot: [
     "Trip 1|08.00 – 10.00",
@@ -136,7 +114,7 @@ const CONFIG = {
       ],
     },
     {
-      judul: "Paket Makan Rp20.000/pax",
+      judul: "Paket Makan Rp25.000/pax",
       harga: "",
       poin: [
         "Nasi putih",
@@ -146,7 +124,7 @@ const CONFIG = {
       ],
     },
     {
-      judul: "Paket Makan Rp25.000/pax",
+      judul: "Paket Makan Rp30.000/pax",
       harga: "",
       poin: [
         "Nasi putih",
@@ -209,7 +187,7 @@ $("paketList").innerHTML = CONFIG.paket
   <div class="card pkg">
     <h3>${p.nama}</h3><span class="badge">⏱ ${p.durasi}</span>
     <ul class="list">${ul(p.info)}</ul>
-    <h4>Trek</h4><div class="chips">${CONFIG.trek.map((t) => `<i>${t}</i>`).join("")}</div>
+    <h4>Trek</h4><div class="chips">${p.trek.map((t) => `<i>${t}</i>`).join("")}</div>
     <h4>Fasilitas</h4><ul class="list">${ul(p.fasilitas)}</ul>
     <div class="prices"><div><b>${p.sendiri}</b><small>Sendiri</small></div><div><b>${p.tandem}</b><small>Tandem</small></div></div>
     <a class="btn sm" target="_blank" rel="noopener" href="${wa("Halo, saya tertarik " + p.nama)}">Pesan ${p.nama}</a>
