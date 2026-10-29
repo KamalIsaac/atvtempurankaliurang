@@ -1,0 +1,6 @@
+FOLDER FOTO ATV TEMPURAN KALIURANG
+
+1. Foto galeri: simpan dengan nama galeri-1.jpg, galeri-2.jpg, ... galeri-8.jpg
+   (atau ubah daftarnya di script.js bagian CONFIG > galeri).
+2. Foto latar bagian atas (opsional): hero.jpg (disarankan landscape, lebar 1600px).
+3. Tips: ukuran foto sebaiknya di bawah 300 KB per file (kompres dulu) agar website cepat.
