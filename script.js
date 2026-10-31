@@ -37,16 +37,16 @@ const CONFIG = {
       sendiri: "300K",
       tandem: "350K",
       trek: [
+        "Bukit Songo Papat",
         "Gardu Pandang",
         "Omah Putih",
         "Kaliurang Explore Entrance",
         "Lorong Oxygen",
-        "Tankaman Natural Park",
         "Trek Lumpur",
         "Sungai Tempuran",
       ], // daftar trek paket ini
       info: [
-        "Trip ATV (150 cc) explore Kaliurang full trek",
+        "Trip ATV (150 cc) explore Kaliurang full trek, hanya berhenti di Bukit Songo Papat",
         "Open trip",
         "Bisa dipesan on the spot atau reservasi via WhatsApp",
       ],
@@ -67,6 +67,7 @@ const CONFIG = {
       tandem: "450K",
       trek: [
         "Nawang Jagad",
+        "Bukit Songo Papat",
         "Gardu Pandang",
         "Omah Putih",
         "Kaliurang Explore Entrance",
