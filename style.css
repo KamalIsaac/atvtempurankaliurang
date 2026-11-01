@@ -701,3 +701,15 @@ html {
     gap: 10px;
   }
 }
+
+/* visitor counter */
+.visitor-counter {
+  text-align: center;
+  margin: 14px 0;
+  zoom: 1.8;
+}
+.visitor-counter img {
+  height: 100px;
+  width: auto;
+  max-width: 100%;
+}
