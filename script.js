@@ -4,6 +4,9 @@ const CONFIG = {
   telpTampil: "0823 2410 2206",
   // Foto galeri: file ada di folder images/. Tambah/ubah baris untuk mengganti foto.
   // Tambah/ubah baris untuk menambah foto, "ket" = keterangan (boleh kosong).
+  // VIDEO di galeri: simpan file di folder images/, lalu tambahkan baris seperti ini di daftar galeri:
+  //   { video: "images/video-1.mp4", src: "images/video-1.jpg", ket: "Seru di trek" },   (src = gambar sampul, boleh dihapus)
+  //   { yt: "ID_VIDEO_YOUTUBE", ket: "Video YouTube" },
   galeri: [
     { src: "images/galeri-1.jpg", ket: "Berpose dengan latar Gunung Merapi" },
     { src: "images/galeri-2.jpg", ket: "Tankaman Natural Park" },
@@ -28,7 +31,29 @@ const CONFIG = {
     { src: "images/galeri-18.jpg", ket: "" },
     { src: "images/galeri-19.jpg", ket: "" },
     { src: "images/galeri-20.jpg", ket: "" },
+    {
+      video: "images/video-1.mp4",
+      src: "images/video-1.jpg",
+      ket: "Seru di trek",
+    },
+    {
+      video: "images/video-2.mp4",
+      src: "images/video-2.jpg",
+      ket: "Kaliurang di Musim Hujan",
+    },
+    {
+      video: "images/video-3.mp4",
+      src: "images/video-3.jpg",
+      ket: "Seru di trek sungai",
+    },
+    {
+      video: "images/video-4.mp4",
+      src: "images/video-4.jpg",
+      ket: "Bisa langsung lihat gunung merapi",
+    },
   ],
+  // Penghitung pengunjung (opsional): isi kode akun GoatCounter, contoh "atvtempuran". Kosongkan jika belum dipakai.
+  goatcounter: "kamalisaac",
   hero: "images/hero.jpg", // foto latar bagian atas (opsional)
   paket: [
     {
@@ -245,29 +270,78 @@ const onScroll = () => navbar.classList.toggle("scrolled", window.scrollY > 40);
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
-// Galeri foto (kotak kosong tampil jika foto belum ada)
+// Galeri foto & video (kotak kosong tampil jika foto belum ada)
+const lb = $("lightbox"),
+  lbImg = lb.querySelector("img"),
+  lbVid = lb.querySelector("video"),
+  lbFrame = lb.querySelector("iframe");
 $("galleryList").innerHTML = CONFIG.galeri
-  .map(
-    (g, i) => `
-  <figure class="ph" data-i="${i}"><img loading="lazy" src="${g.src}" alt="${g.ket || "Foto ATV Tempuran Kaliurang"}">
-  <span class="ph-note">Taruh foto di<br><code>${g.src}</code></span>${g.ket ? `<figcaption>${g.ket}</figcaption>` : ""}</figure>`,
-  )
+  .map((g, i) => {
+    const isVid = g.video || g.yt,
+      alt = g.ket || "Foto ATV Tempuran Kaliurang";
+    const cover =
+      g.src || (g.yt ? `https://img.youtube.com/vi/${g.yt}/hqdefault.jpg` : "");
+    const thumb = cover
+      ? `<img loading="lazy" src="${cover}" alt="${alt}">`
+      : `<video muted playsinline preload="metadata" src="${g.video}#t=0.5"></video>`;
+    return `<figure class="${isVid ? "vid" : "ph"}" data-i="${i}">${thumb}${
+      isVid
+        ? '<span class="play">▶</span>'
+        : `<span class="ph-note">Taruh foto di<br><code>${g.src}</code></span>`
+    }${g.ket ? `<figcaption>${g.ket}</figcaption>` : ""}</figure>`;
+  })
   .join("");
-document.querySelectorAll("#galleryList img").forEach((img) => {
+document.querySelectorAll("#galleryList figure.ph img").forEach((img) => {
   img.addEventListener("load", () => img.parentElement.classList.remove("ph"));
   img.addEventListener("error", () => img.remove());
   if (img.complete && img.naturalWidth)
     img.parentElement.classList.remove("ph");
 });
-const lb = $("lightbox");
+function closeLb() {
+  lb.classList.remove("open", "m-img", "m-vid", "m-yt");
+  lbVid.pause();
+  lbVid.removeAttribute("src");
+  lbFrame.removeAttribute("src");
+}
 $("galleryList").addEventListener("click", (e) => {
-  const img = e.target.closest("figure:not(.ph)")?.querySelector("img");
-  if (img) {
-    lb.querySelector("img").src = img.src;
-    lb.classList.add("open");
+  const fig = e.target.closest("figure");
+  if (!fig || fig.classList.contains("ph")) return;
+  const g = CONFIG.galeri[fig.dataset.i];
+  if (g.video) {
+    lbVid.src = g.video;
+    lb.classList.add("open", "m-vid");
+    lbVid.play().catch(() => {});
+  } else if (g.yt) {
+    lbFrame.src = `https://www.youtube-nocookie.com/embed/${g.yt}?autoplay=1&rel=0`;
+    lb.classList.add("open", "m-yt");
+  } else {
+    lbImg.src = fig.querySelector("img").src;
+    lb.classList.add("open", "m-img");
   }
 });
-lb.addEventListener("click", () => lb.classList.remove("open"));
+lb.addEventListener("click", (e) => {
+  if (e.target === lb || e.target.id === "lbX" || e.target === lbImg) closeLb();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeLb();
+});
+
+// Penghitung pengunjung (GoatCounter, opsional)
+if (CONFIG.goatcounter) {
+  const base = `https://${CONFIG.goatcounter}.goatcounter.com`;
+  const sc = document.createElement("script");
+  sc.async = true;
+  sc.dataset.goatcounter = base + "/count";
+  sc.src = "https://gc.zgo.at/count.js";
+  document.head.appendChild(sc);
+  fetch(base + "/counter/TOTAL.json")
+    .then((r) => r.json())
+    .then((d) => {
+      $("visit").textContent = d.count;
+      $("visitWrap").hidden = false;
+    })
+    .catch(() => {});
+}
 
 // Foto latar hero (aktif otomatis jika file ada)
 const hi = new Image();
