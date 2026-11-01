@@ -694,3 +694,10 @@ html {
   margin-bottom: 14px;
   display: block;
 }
+
+@media (max-width: 640px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}

@@ -260,7 +260,7 @@ const io = new IntersectionObserver(
         io.unobserve(e.target);
       }
     }),
-  { threshold: 0.08 },
+  { threshold: 0, rootMargin: "0px 0px -60px 0px" },
 );
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
@@ -327,11 +327,11 @@ document.addEventListener("keydown", (e) => {
 });
 
 // Penghitung pengunjung (GoatCounter, opsional)
-if (CONFIG.goatcounter) {
-  const base = `https://${CONFIG.goatcounter}.goatcounter.com`;
+if (CONFIG.kamalisaac) {
+  const base = `https://${CONFIG.kamalisaac}.goatcounter.com`;
   const sc = document.createElement("script");
   sc.async = true;
-  sc.dataset.goatcounter = base + "/count";
+  sc.dataset.kamalisaac = base + "/count";
   sc.src = "https://gc.zgo.at/count.js";
   document.head.appendChild(sc);
   fetch(base + "/counter/TOTAL.json")
