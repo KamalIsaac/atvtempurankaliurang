@@ -327,21 +327,21 @@ document.addEventListener("keydown", (e) => {
 });
 
 // Penghitung pengunjung (GoatCounter, opsional)
-if (CONFIG.kamalisaac) {
-  const base = `https://${CONFIG.kamalisaac}.goatcounter.com`;
-  const sc = document.createElement("script");
-  sc.async = true;
-  sc.dataset.kamalisaac = base + "/count";
-  sc.src = "https://gc.zgo.at/count.js";
-  document.head.appendChild(sc);
-  fetch(base + "/counter/TOTAL.json")
-    .then((r) => r.json())
-    .then((d) => {
-      $("visit").textContent = d.count;
-      $("visitWrap").hidden = false;
-    })
-    .catch(() => {});
-}
+// if (CONFIG.kamalisaac) {
+//   const base = `https://${CONFIG.kamalisaac}.goatcounter.com`;
+//   const sc = document.createElement("script");
+//   sc.async = true;
+//   sc.dataset.kamalisaac = base + "/count";
+//   sc.src = "https://gc.zgo.at/count.js";
+//   document.head.appendChild(sc);
+//   fetch(base + "/counter/TOTAL.json")
+//     .then((r) => r.json())
+//     .then((d) => {
+//       $("visit").textContent = d.count;
+//       $("visitWrap").hidden = false;
+//     })
+//     .catch(() => {});
+// }
 
 // Foto latar hero (aktif otomatis jika file ada)
 const hi = new Image();
