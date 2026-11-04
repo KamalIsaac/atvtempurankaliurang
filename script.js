@@ -52,8 +52,6 @@ const CONFIG = {
       ket: "Bisa langsung lihat gunung merapi",
     },
   ],
-  // Penghitung pengunjung (opsional): isi kode akun GoatCounter, contoh "atvtempuran". Kosongkan jika belum dipakai.
-  goatcounter: "kamalisaac",
   hero: "images/hero.jpg", // foto latar bagian atas (opsional)
   paket: [
     {
@@ -325,23 +323,6 @@ lb.addEventListener("click", (e) => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeLb();
 });
-
-// Penghitung pengunjung (GoatCounter, opsional)
-// if (CONFIG.kamalisaac) {
-//   const base = `https://${CONFIG.kamalisaac}.goatcounter.com`;
-//   const sc = document.createElement("script");
-//   sc.async = true;
-//   sc.dataset.kamalisaac = base + "/count";
-//   sc.src = "https://gc.zgo.at/count.js";
-//   document.head.appendChild(sc);
-//   fetch(base + "/counter/TOTAL.json")
-//     .then((r) => r.json())
-//     .then((d) => {
-//       $("visit").textContent = d.count;
-//       $("visitWrap").hidden = false;
-//     })
-//     .catch(() => {});
-// }
 
 // Foto latar hero (aktif otomatis jika file ada)
 const hi = new Image();
