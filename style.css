@@ -349,13 +349,20 @@ footer {
   gap: 12px;
   margin: 18px 0 4px;
 }
-.prices div {
+.prices .opt {
   flex: 1;
   text-align: center;
   background: linear-gradient(135deg, var(--sky1), var(--sky2));
   color: #fff;
   border-radius: 14px;
-  padding: 12px;
+  padding: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.prices .opt:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(23, 105, 201, 0.35);
 }
 .prices b {
   display: block;
@@ -712,4 +719,148 @@ html {
   height: 100px;
   width: auto;
   max-width: 100%;
+}
+
+/* PILLET ASURANSI (HERO) */
+.insure-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  background: rgba(46, 204, 113, 0.16);
+  border: 1px solid rgba(46, 204, 113, 0.6);
+  color: #eafff2;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.insure-pill .ic {
+  color: #2ecc71;
+}
+
+/* FOTO OPSI PAKET (SENDIRI / TANDEM) */
+.prices .opt {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+}
+.opt-imgwrap {
+  display: block;
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #e3f1ff;
+}
+.opt-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* LOKASI & REVIEW GOOGLE */
+.lokasi-wrap {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: start;
+}
+.map-box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.map-box iframe {
+  width: 100%;
+  height: 300px;
+  border: 0;
+  display: block;
+}
+.map-foot {
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.map-foot p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  flex: 1 1 180px;
+}
+.rev-summary {
+  background: linear-gradient(135deg, var(--sky1), var(--sky2));
+  color: #fff;
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.rev-score {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.rev-score b {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+.rev-stars {
+  color: #ffd54f;
+  letter-spacing: 2px;
+}
+.rev-count {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+.g-logo {
+  flex: none;
+  background: #fff;
+  border-radius: 50%;
+  padding: 8px;
+  display: grid;
+  place-items: center;
+}
+.rev-cards {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+.rev-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin: 0;
+}
+.rev-card blockquote {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.rev-card figcaption {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+#reviewBox .btn {
+  margin-left: 0;
+}
+@media (max-width: 860px) {
+  .lokasi-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .map-box iframe {
+    height: 240px;
+  }
+  .rev-score b {
+    font-size: 2rem;
+  }
 }

@@ -59,6 +59,9 @@ const CONFIG = {
       durasi: "1,5 – 2 jam",
       sendiri: "300K",
       tandem: "350K",
+      // Foto opsi harga (kosongkan "" jika tidak ingin pakai foto)
+      fotoSendiri: "images/paket-sendiri.jpg",
+      fotoTandem: "images/paket-tandem.jpg",
       trek: [
         "Bukit Songo Papat",
         "Gardu Pandang",
@@ -74,6 +77,7 @@ const CONFIG = {
         "Bisa dipesan on the spot atau reservasi via WhatsApp",
       ],
       fasilitas: [
+        "Asuransi Jasa Raharja",
         "Pemandu profesional",
         "Helm & boots",
         "Dokumentasi (foto & video)",
@@ -88,6 +92,8 @@ const CONFIG = {
       durasi: "2 – 2,5 jam",
       sendiri: "400K",
       tandem: "450K",
+      fotoSendiri: "images/paket2-sendiri.jpg",
+      fotoTandem: "images/paket2-tandem.jpg",
       trek: [
         "Nawang Jagad",
         "Bukit Songo Papat",
@@ -106,6 +112,7 @@ const CONFIG = {
         "Menyesuaikan jadwal operasional destinasi wisata (hari & jam buka/tutup)",
       ],
       fasilitas: [
+        "Asuransi Jasa Raharja",
         "Pemandu profesional",
         "Helm & boots",
         "Dokumentasi (foto & video)",
@@ -175,9 +182,27 @@ const CONFIG = {
     "Makan disajikan setelah trip, bisa prasmanan atau dengan box.",
     "Bisa request jenis makanan dengan harga menyesuaikan.",
   ],
+  // Google Maps & review
+  mapsUrl: "https://www.google.com/maps/search/ATV+Tempuran+Kaliurang",
+  rating: { nilai: 5.0, jumlah: 318 },
+  review: [
+    { teks: "Seru, aman, new experience.", tanggal: "Juli 2025" },
+    {
+      teks: "Super fun! All staff ramah, first time experience yg bikin nagih.",
+      tanggal: "April 2025",
+    },
+    {
+      teks: "First time riding an ATV. The instructors' briefing was clear and easy to understand. The price is worth the ride. The track was challenging and fun at the same time. Overall, a must try experience in Jogja!",
+      tanggal: "Oktober 2024",
+    },
+    {
+      teks: "Affordable attraction, but very exciting experience, just the right amount of distance and challenging route, very satisfying. Safe for newbie, safe to bring children — I took my 8 yo daughter with me. Responsive and responsible facilitator, reliable vehicle, proper safety gear, great documentation!",
+      tanggal: "April 2025",
+    },
+  ],
   syarat: [
     "Penyewa wajib melakukan pelunasan sebelum trip dilaksanakan.",
-    "Penyewa wajib memahami & menerima bahwa trip ini belum memiliki asuransi.",
+    "Trip ini sudah dilindungi asuransi Jasa Raharja.",
     "Pengendara ATV bertanggung jawab penuh terhadap diri sendiri dan unit yang dikendarai.",
     "Pengendara wajib berusia 16 tahun ke atas & bisa mengendarai kendaraan bermotor.",
     "ATV maksimal digunakan 2 orang dengan beban maksimal 120 kg.",
@@ -205,15 +230,23 @@ const wa = (t) =>
   `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;
 const ul = (a) => a.map((x) => `<li>${x}</li>`).join("");
 
+const fotoOpt = (src, alt) =>
+  src
+    ? `<span class="opt-imgwrap"><img class="opt-img" src="${src}" alt="${alt}" loading="lazy" onerror="this.remove()"></span>`
+    : "";
+
 $("paketList").innerHTML = CONFIG.paket
   .map(
     (p) => `
-  <div class="card pkg">
+  <div class="card pkg" data-testid="${p.nama.toLowerCase().replace(/\s+/g, "-")}-card">
     <h3>${p.nama}</h3><span class="badge">⏱ ${p.durasi}</span>
     <ul class="list">${ul(p.info)}</ul>
     <h4>Trek</h4><div class="chips">${p.trek.map((t) => `<i>${t}</i>`).join("")}</div>
     <h4>Fasilitas</h4><ul class="list">${ul(p.fasilitas)}</ul>
-    <div class="prices"><div><b>${p.sendiri}</b><small>Sendiri</small></div><div><b>${p.tandem}</b><small>Tandem</small></div></div>
+    <div class="prices">
+      <a class="opt" data-testid="${p.nama.toLowerCase().replace(/\s+/g, "-")}-opsi-sendiri" target="_blank" rel="noopener" href="${wa(`Halo, saya mau pesan ${p.nama}, opsi Sendiri (${p.sendiri})`)}">${fotoOpt(p.fotoSendiri, "ATV dikendarai sendiri")}<b>${p.sendiri}</b><small>Sendiri</small></a>
+      <a class="opt" data-testid="${p.nama.toLowerCase().replace(/\s+/g, "-")}-opsi-tandem" target="_blank" rel="noopener" href="${wa(`Halo, saya mau pesan ${p.nama}, opsi Tandem (${p.tandem})`)}">${fotoOpt(p.fotoTandem, "ATV tandem berboncengan")}<b>${p.tandem}</b><small>Tandem</small></a>
+    </div>
     <a class="btn sm" target="_blank" rel="noopener" href="${wa("Halo, saya tertarik " + p.nama)}">Pesan ${p.nama}</a>
   </div>`,
   )
@@ -237,6 +270,37 @@ $("extraNote").innerHTML = ul(CONFIG.extraNote);
 
 $("syaratList").innerHTML =
   `<details open><summary>Lihat semua ketentuan</summary><ol class="list">${ul(CONFIG.syarat)}</ol></details>`;
+
+// Lokasi & review Google
+const bintang = "★★★★★";
+$("reviewBox").innerHTML = `
+  <div class="rev-summary" data-testid="review-summary">
+    <span class="g-logo" aria-hidden="true">
+      <svg viewBox="0 0 48 48" width="30" height="30">
+        <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.7-.4-3.9z"/>
+        <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+        <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/>
+        <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.5l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.7-.4-3.9z"/>
+      </svg>
+    </span>
+    <div>
+      <div class="rev-score"><b>${CONFIG.rating.nilai.toFixed(1)}</b><span class="rev-stars">${bintang}</span></div>
+      <div class="rev-count">${CONFIG.rating.jumlah} ulasan di Google</div>
+    </div>
+  </div>
+  <div class="rev-cards">
+    ${CONFIG.review
+      .map(
+        (r) => `
+      <figure class="rev-card" data-testid="review-card">
+        <span class="rev-stars">${bintang}</span>
+        <blockquote>${r.teks}</blockquote>
+        <figcaption>${r.tanggal} · Ulasan Google</figcaption>
+      </figure>`,
+      )
+      .join("")}
+  </div>
+  <a class="btn sm" data-testid="lihat-ulasan-button" target="_blank" rel="noopener" href="${CONFIG.mapsUrl}">Lihat semua ulasan di Google</a>`;
 
 $("telp").textContent = CONFIG.telpTampil;
 document.querySelectorAll("[data-wa]").forEach((a) => {

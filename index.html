@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ATV Tempuran Kaliurang – Petualangan di Lereng Merapi</title>
     <!-- Google tag (gtag.js) -->
-    <!-- Google tag (gtag.js) -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-KL2G77N6M0"
@@ -21,12 +20,13 @@
     </script>
     <meta
       name="description"
-      content="Wisata ATV di Kaliurang, Sleman. Trek berbatu, sungai, dan pemandangan Merapi."
+      content="Wisata ATV di Kaliurang, Sleman. Trek berbatu, sungai, dan pemandangan Merapi. Sudah berasuransi Jasa Raharja."
     />
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="images/logo.jpeg" />
   </head>
   <body>
+    <div id="root" style="display: none"></div>
     <svg width="0" height="0" style="position: absolute" aria-hidden="true">
       <defs>
         <symbol id="ig" viewBox="0 0 24 24">
@@ -59,6 +59,17 @@
           <circle cx="12" cy="12" r="9" />
           <path d="M12 7v5l3 2" />
         </symbol>
+        <symbol id="shield" viewBox="0 0 24 24">
+          <path
+            d="M12 2.5l7.5 3.2v5c0 4.9-3.2 9.4-7.5 11-4.3-1.6-7.5-6.1-7.5-11v-5z"
+          />
+          <path d="M8.8 12l2.2 2.2 4.2-4.4" />
+        </symbol>
+        <symbol id="star" viewBox="0 0 24 24">
+          <path
+            d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"
+          />
+        </symbol>
       </defs>
     </svg>
     <header class="hero" id="home">
@@ -78,6 +89,7 @@
             <li><a href="#paket">Paket</a></li>
             <li><a href="#jadwal">Jadwal</a></li>
             <li><a href="#galeri">Galeri</a></li>
+            <li><a href="#lokasi">Lokasi</a></li>
             <li><a href="#syarat">Syarat</a></li>
             <li><a href="#booking">Booking</a></li>
             <li><a href="#kontak">Kontak</a></li>
@@ -105,6 +117,10 @@
           via WhatsApp</a
         >
         <a class="btn ghost" href="#paket">Lihat Paket</a>
+        <div class="insure-pill" data-testid="insurance-badge">
+          <svg class="ic" aria-hidden="true"><use href="#shield" /></svg>
+          Sudah Berasuransi Jasa Raharja
+        </div>
         <div class="social hero-soc">
           <a
             href="https://www.instagram.com/atvtempuran.kaliurang/"
@@ -170,9 +186,10 @@
           </div>
           <div class="card">
             <span>🦺</span>
-            <h3>Aman &amp; Didampingi</h3>
+            <h3>Aman &amp; Berasuransi</h3>
             <p>
-              Pemandu profesional, helm &amp; boots, dan dokumentasi foto/video.
+              Pemandu profesional, helm &amp; boots, dokumentasi foto/video, dan
+              asuransi Jasa Raharja.
             </p>
           </div>
           <div class="card">
@@ -240,7 +257,7 @@
       </section>
 
       <section id="kontak" class="w reveal">
-        <h2>Kontak &amp; Lokasi</h2>
+        <h2>Kontak Kami</h2>
         <p class="sub">Video dan foto terbaru ada di media sosial kami.</p>
         <div class="grid">
           <div class="card">
@@ -284,28 +301,45 @@
               Buka TikTok</a
             >
           </div>
-          <div class="card">
-            <h3>
-              <svg class="ic" aria-hidden="true"><use href="#pin" /></svg>
-              Alamat
-            </h3>
-            <p>
-              ATV Tempuran Kaliurang, Jl Kaliurang Km 24, Ngipiksari,
-              Hargobinangun, Pakem, Sleman, Yogyakarta.
-            </p>
-            <p class="note">
-              Dari pintu masuk Kaliurang, lurus ikuti jalan raya sampai tikungan
-              4. Ada banner ATV Tempuran di kanan jalan, masuk ke kanan.
-            </p>
-            <a
-              class="btn sm"
-              target="_blank"
-              rel="noopener"
-              href="https://www.google.com/maps/search/ATV+Tempuran+Kaliurang"
-              ><svg class="ic" aria-hidden="true"><use href="#pin" /></svg> Buka
-              Maps</a
-            >
+        </div>
+      </section>
+      <section id="lokasi" class="w reveal">
+        <h2>Lokasi &amp; Review Google</h2>
+        <p class="sub">
+          Lihat peta lokasi dan ulasan asli para petualang di Google Maps.
+        </p>
+        <div class="lokasi-wrap">
+          <div class="map-box">
+            <iframe
+              data-testid="google-maps-embed"
+              src="https://www.google.com/maps?q=-7.608775,110.428957&z=16&output=embed"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Peta ATV Tempuran Kaliurang"
+            ></iframe>
+            <div class="map-foot">
+              <p>
+                ATV Tempuran Kaliurang, Jl Kaliurang Km 24, Ngipiksari,
+                Hargobinangun, Pakem, Sleman, Yogyakarta.
+              </p>
+              <p class="note">
+                Dari pintu masuk Kaliurang, lurus ikuti jalan raya sampai
+                tikungan 4. Ada banner ATV Tempuran di kanan jalan, masuk ke
+                kanan.
+              </p>
+              <a
+                class="btn sm"
+                data-testid="buka-google-maps-button"
+                target="_blank"
+                rel="noopener"
+                href="https://www.google.com/maps/search/ATV+Tempuran+Kaliurang"
+                ><svg class="ic" aria-hidden="true"><use href="#pin" /></svg>
+                Buka Maps</a
+              >
+            </div>
           </div>
+          <div id="reviewBox" data-testid="google-reviews"></div>
         </div>
       </section>
     </main>
